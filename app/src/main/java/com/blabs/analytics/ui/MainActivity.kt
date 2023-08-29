@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     val viewModel: AnalyticsViewModel by viewModels()
 
-    val analyticsManager: AnalyticsManager by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,16 +36,7 @@ class MainActivity : AppCompatActivity() {
 //            "Login", mapOf("user_id" to "123"), AnalyticsTool.GOOGLE_ANALYTICS
 //        )
 //        analyticsManager.trackScreen("Home", emptyMap(), AnalyticsTool.FIREBASE_ANALYTICS)
-        analyticsManager.trackEvent(
-            "Purchase",
-            mapOf("item_id" to "456"),
-            AnalyticsTool.GOOGLE_ANALYTICS,
-            AnalyticsTool.FIREBASE_ANALYTICS
-        )
-        analyticsManager.trackEvent(
-            "Purchase",
-            mapOf("item_id" to "456")
-        )
+
 //
     }
 }
