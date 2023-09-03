@@ -16,33 +16,36 @@ import com.webengage.sdk.android.WebEngageConfig
 
 class WebEngageAnalyticsTracker : AnalyticsTracker {
 
-    private var weAnalytics: Analytics? = null
+    private var webEngageAnalytics: Analytics? = null
     override fun initialize(context: Context) {
-        val webEngage = WebEngageConfig.Builder()
-            .setWebEngageKey(context.getValuesFromMetaData(ApiKeys.WEB_ENGAGE_KEY))
-            .setDebugMode(BuildConfig.DEBUG)
-            .setLocationTrackingStrategy(LocationTrackingStrategy.DISABLED).build()
-        (context as Application).registerActivityLifecycleCallbacks(
-            WebEngageActivityLifeCycleCallbacks(context, webEngage)
-        )
-        weAnalytics = WebEngage.get().analytics()
-
+        context.getValuesFromMetaData(ApiKeys.WEB_ENGAGE_KEY)?.let {
+            val webEngage = WebEngageConfig.Builder()
+                .setWebEngageKey(it)
+                .setDebugMode(BuildConfig.DEBUG)
+                .setLocationTrackingStrategy(LocationTrackingStrategy.DISABLED).build()
+            (context as Application).registerActivityLifecycleCallbacks(
+                WebEngageActivityLifeCycleCallbacks(context, webEngage)
+            )
+            webEngageAnalytics = WebEngage.get().analytics()
+        } ?: run {
+            throw Exception("Web Engage API key not found in manifest file")
+        }
     }
 
-    override fun trackEvent(eventName: String, parameters: Map<String, Any>) {
+    override fun trackEvent(eventName: String, parameters: Map<String, Any>?) {
         val map: MutableMap<String, Any> = HashMap()
-        parameters.forEach { (key, value) ->
+        parameters?.forEach { (key, value) ->
             map[key] = value
         }
-        weAnalytics?.track(eventName, map)
+        webEngageAnalytics?.track(eventName, map)
     }
 
-    override fun trackScreen(eventName: String, parameters: Map<String, Any>) {
+    override fun trackScreen(eventName: String, parameters: Map<String, Any>?) {
         val map: MutableMap<String, Any> = HashMap()
-        parameters.forEach { (key, value) ->
+        parameters?.forEach { (key, value) ->
             map[key] = value
         }
-        weAnalytics?.screenNavigated(eventName, map)
+        webEngageAnalytics?.screenNavigated(eventName, map)
     }
 
     override fun getAnalyticsTool(): AnalyticsTool {

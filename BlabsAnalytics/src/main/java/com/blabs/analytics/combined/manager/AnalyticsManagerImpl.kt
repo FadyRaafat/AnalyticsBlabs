@@ -37,7 +37,7 @@ class AnalyticsManagerImpl constructor(
      * @see AnalyticsManager
      */
     override fun trackEvent(
-        eventName: String, parameters: Map<String, Any>, vararg tools: AnalyticsTool
+        eventName: String, parameters: Map<String, Any>?, vararg tools: AnalyticsTool
     ) {
         analyticsTrackers.forEach { tracker ->
             if (tools.isEmpty() || tools.contains(tracker.getAnalyticsTool())) {
@@ -58,7 +58,7 @@ class AnalyticsManagerImpl constructor(
      * @see AnalyticsManager
      */
     override fun trackScreen(
-        eventName: String, parameters: Map<String, Any>, vararg tools: AnalyticsTool
+        eventName: String, parameters: Map<String, Any>?, vararg tools: AnalyticsTool
     ) {
         analyticsTrackers.forEach { tracker ->
             if (tools.isEmpty() || tools.contains(tracker.getAnalyticsTool())) {

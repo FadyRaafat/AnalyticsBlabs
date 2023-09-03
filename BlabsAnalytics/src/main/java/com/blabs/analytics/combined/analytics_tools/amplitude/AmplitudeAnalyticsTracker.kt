@@ -15,23 +15,27 @@ class AmplitudeAnalyticsTracker : AnalyticsTracker {
 
     private var amplitudeClient: AmplitudeClient? = null
     override fun initialize(context: Context) {
-        amplitudeClient = Amplitude.getInstance()
-            .initialize(context, context.getValuesFromMetaData(ApiKeys.AMPLITUDE_API_KEY))
-            .enableForegroundTracking(context as Application)
+        context.getValuesFromMetaData(ApiKeys.AMPLITUDE_API_KEY)?.let {
+            amplitudeClient = Amplitude.getInstance()
+                .initialize(context, it)
+                .enableForegroundTracking(context as Application)
+        } ?: run {
+            throw Exception("Amplitude API key not found in manifest file")
+        }
     }
 
-    override fun trackEvent(eventName: String, parameters: Map<String, Any>) {
+    override fun trackEvent(eventName: String, parameters: Map<String, Any>?) {
         val eventProperties = JSONObject()
-        parameters.forEach { (key, value) ->
+        parameters?.forEach { (key, value) ->
             eventProperties.put(key, value)
         }
         amplitudeClient?.logEvent(eventName, eventProperties)
 
     }
 
-    override fun trackScreen(eventName: String, parameters: Map<String, Any>) {
+    override fun trackScreen(eventName: String, parameters: Map<String, Any>?) {
         val eventProperties = JSONObject()
-        parameters.forEach { (key, value) ->
+        parameters?.forEach { (key, value) ->
             eventProperties.put(key, value)
         }
         amplitudeClient?.logEvent(eventName, eventProperties)

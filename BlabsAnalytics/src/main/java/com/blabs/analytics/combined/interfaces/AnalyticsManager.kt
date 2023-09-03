@@ -7,6 +7,6 @@ import com.blabs.analytics.combined.utils.enums.AnalyticsTool
  */
 interface AnalyticsManager {
 
-    fun trackEvent(eventName: String, parameters: Map<String, Any>, vararg tools: AnalyticsTool)
-    fun trackScreen(eventName: String, parameters: Map<String, Any>, vararg tools: AnalyticsTool)
+    fun trackEvent(eventName: String, parameters: Map<String, Any>?, vararg tools: AnalyticsTool)
+    fun trackScreen(eventName: String, parameters: Map<String, Any>?, vararg tools: AnalyticsTool)
 }

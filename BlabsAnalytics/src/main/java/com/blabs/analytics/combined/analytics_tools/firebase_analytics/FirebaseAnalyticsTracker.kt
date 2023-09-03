@@ -14,18 +14,18 @@ class FirebaseAnalyticsTracker(private val firebaseApp: FirebaseAnalytics) : Ana
         firebaseAnalytics = firebaseApp
     }
 
-    override fun trackEvent(eventName: String, parameters: Map<String, Any>) {
+    override fun trackEvent(eventName: String, parameters: Map<String, Any>?) {
         val bundle = Bundle()
-        parameters.forEach { (key, value) ->
+        parameters?.forEach { (key, value) ->
             bundle.set(key, value)
         }
         firebaseAnalytics?.logEvent(eventName, bundle)
 
     }
 
-    override fun trackScreen(eventName: String, parameters: Map<String, Any>) {
+    override fun trackScreen(eventName: String, parameters: Map<String, Any>?) {
         val bundle = Bundle()
-        parameters.forEach { (key, value) ->
+        parameters?.forEach { (key, value) ->
             bundle.set(key, value)
         }
         firebaseAnalytics?.logEvent(eventName, bundle)

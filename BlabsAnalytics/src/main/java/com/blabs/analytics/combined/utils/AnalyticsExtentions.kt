@@ -8,7 +8,7 @@ import android.os.Parcelable
 import com.blabs.analytics.combined.utils.enums.ApiKeys
 import java.io.Serializable
 
-fun Context.getValuesFromMetaData(apiKey: ApiKeys): String {
+fun Context.getValuesFromMetaData(apiKey: ApiKeys): String? {
     return (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         packageManager.getApplicationInfo(
             packageName, PackageManager.ApplicationInfoFlags.of(0)
@@ -17,9 +17,12 @@ fun Context.getValuesFromMetaData(apiKey: ApiKeys): String {
         packageManager.getApplicationInfo(
             packageName, PackageManager.GET_META_DATA
         )
-    }).metaData?.getString(apiKey.key) ?: ""
-
+    }).metaData?.getString(apiKey.key)?.valueOrNull()
 }
+
+fun String.valueOrNull() = this.ifEmpty { null }
+
+
 operator fun <T : Any> Bundle.set(key: String, value: T?) {
     when (value) {
         is String -> putString(key, value)

@@ -20,14 +20,14 @@ interface AnalyticsTracker {
      * @param eventName name of the event
      * @param parameters parameters of the event
      */
-    fun trackEvent(eventName: String, parameters: Map<String, Any>)
+    fun trackEvent(eventName: String, parameters: Map<String, Any>?)
 
     /**
      * Track screen to the analytics tracker
      * @param eventName name of the screen or screen_view event
      * @param parameters parameters of the screen
      */
-    fun trackScreen(eventName: String, parameters: Map<String, Any>)
+    fun trackScreen(eventName: String, parameters: Map<String, Any>?)
 
     /**
      * Get the analytics tool
