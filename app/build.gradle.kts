@@ -1,8 +1,11 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
-    id ("dagger.hilt.android.plugin")
+    id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
 
 }
 
@@ -21,14 +24,17 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        manifestPlaceholders["AMPLITUDE_API_KEY"] = gradleLocalProperties(rootDir).getProperty("AMPLITUDE_API_KEY")
+        manifestPlaceholders["WEB_ENGAGE_KEY"] = gradleLocalProperties(rootDir).getProperty("WEB_ENGAGE_KEY")
     }
+
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -41,6 +47,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -80,9 +87,17 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.44.2")
 
     implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
-    implementation("com.google.android.gms:play-services-measurement-api:21.3.0")
 
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
+
+
+    // Firebase Analytics
+    implementation(platform("com.google.firebase:firebase-bom:32.2.3"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.android.gms:play-services-measurement-api:21.3.0")
+    implementation("com.google.firebase:firebase-analytics:21.3.0")
+    implementation("com.google.firebase:firebase-core:21.1.1")
+
 
 }

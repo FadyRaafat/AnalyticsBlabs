@@ -9,6 +9,7 @@ import javax.inject.Inject
 class AnalyticsViewModel @Inject constructor(
     private val analyticsManager: AnalyticsManager
 ) : ViewModel() {
+
     fun trackEvent(eventName: String, parameters: Map<String, Any>) {
         analyticsManager.trackEvent(eventName, parameters)
     }

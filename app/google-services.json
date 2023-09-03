@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "535967138559",
+    "project_id": "blabs-analytics",
+    "storage_bucket": "blabs-analytics.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535967138559:android:9d4e9a8e6b356b094482ca",
+        "android_client_info": {
+          "package_name": "com.blabs.analytics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535967138559-ikjd8u1d12kuqfh7cccvbne09e21dprc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blabs.analytics",
+            "certificate_hash": "54e8b50ff31a6350e06d5bd29eb1b9639eacba19"
+          }
+        },
+        {
+          "client_id": "535967138559-2ods24aka6hkpi4gskd60ku3q66kskbm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtz5p3OoNRJ17ACf7RDcdpVWTVWIEgQsU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535967138559-2ods24aka6hkpi4gskd60ku3q66kskbm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

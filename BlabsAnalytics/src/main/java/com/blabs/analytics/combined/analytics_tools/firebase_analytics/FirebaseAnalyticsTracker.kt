@@ -1,19 +1,34 @@
 package com.blabs.analytics.combined.analytics_tools.firebase_analytics
 
-import com.blabs.analytics.combined.enums.AnalyticsTool
+import android.content.Context
+import android.os.Bundle
+import com.blabs.analytics.combined.utils.enums.AnalyticsTool
 import com.blabs.analytics.combined.interfaces.AnalyticsTracker
-import timber.log.Timber
-import javax.inject.Inject
+import com.blabs.analytics.combined.utils.set
+import com.google.firebase.analytics.FirebaseAnalytics
 
-class FirebaseAnalyticsTracker : AnalyticsTracker {
-    override fun trackEvent(eventName: String, parameters: Map<String, Any>) {
-        //  tracking logic for Firebase Analytics
-        Timber.d("timber FirebaseAnalyticsTracker.trackEvent() eventName: $eventName parameters: $parameters")
+class FirebaseAnalyticsTracker(private val firebaseApp: FirebaseAnalytics) : AnalyticsTracker {
+
+    private var firebaseAnalytics: FirebaseAnalytics? = null
+    override fun initialize(context: Context) {
+        firebaseAnalytics = firebaseApp
     }
 
-    override fun trackScreen(screenName: String, parameters: Map<String, Any>) {
-        // screen tracking logic for Firebase Analytics
-        Timber.d("timber FirebaseAnalyticsTracker.trackScreen() screenName: $screenName parameters: $parameters")
+    override fun trackEvent(eventName: String, parameters: Map<String, Any>) {
+        val bundle = Bundle()
+        parameters.forEach { (key, value) ->
+            bundle.set(key, value)
+        }
+        firebaseAnalytics?.logEvent(eventName, bundle)
+
+    }
+
+    override fun trackScreen(eventName: String, parameters: Map<String, Any>) {
+        val bundle = Bundle()
+        parameters.forEach { (key, value) ->
+            bundle.set(key, value)
+        }
+        firebaseAnalytics?.logEvent(eventName, bundle)
     }
 
     override fun getAnalyticsTool(): AnalyticsTool {

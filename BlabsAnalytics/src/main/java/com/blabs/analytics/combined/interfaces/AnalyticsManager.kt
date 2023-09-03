@@ -1,11 +1,12 @@
 package com.blabs.analytics.combined.interfaces
 
-import com.blabs.analytics.combined.enums.AnalyticsTool
+import com.blabs.analytics.combined.utils.enums.AnalyticsTool
 
+/**
+ * AnalyticsManager is an interface which contains the list of all the functions that an analytics manager should implement.
+ */
 interface AnalyticsManager {
 
-    fun provideTrackersAndInitializers(): Pair<Set<AnalyticsTracker>, Map<AnalyticsTool, AnalyticsInitializer>>
-    fun initializeAnalyticsTools(vararg tools: AnalyticsTool)
     fun trackEvent(eventName: String, parameters: Map<String, Any>, vararg tools: AnalyticsTool)
-    fun trackScreen(screenName: String, parameters: Map<String, Any>, vararg tools: AnalyticsTool)
+    fun trackScreen(eventName: String, parameters: Map<String, Any>, vararg tools: AnalyticsTool)
 }

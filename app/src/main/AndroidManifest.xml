@@ -24,6 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.blabs.analytics.AmplitudeApiKey"
+            android:value="${AMPLITUDE_API_KEY}" />
+
+        <meta-data
+            android:name="com.blabs.analytics.WebEngageKey"
+            android:value="${WEB_ENGAGE_KEY}" />
     </application>
 
 </manifest>
