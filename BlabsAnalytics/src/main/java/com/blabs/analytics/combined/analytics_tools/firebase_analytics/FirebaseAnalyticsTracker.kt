@@ -31,7 +31,6 @@ class FirebaseAnalyticsTracker(private val firebaseApp: FirebaseAnalytics) : Ana
         firebaseAnalytics?.logEvent(eventName, bundle)
     }
 
-    override fun getAnalyticsTool(): AnalyticsTool {
-        return AnalyticsTool.FIREBASE_ANALYTICS
-    }
+    override fun getAnalyticsTool() = AnalyticsTool.FIREBASE_ANALYTICS
+
 }

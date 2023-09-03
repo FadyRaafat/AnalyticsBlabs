@@ -7,8 +7,9 @@ import com.blabs.analytics.combined.interfaces.AnalyticsTracker
 
 
 /**
-AnalyticsManagerImpl is the implementation of AnalyticsManager interface.
-It is responsible for initializing all the analytics trackers and delegating the tracking calls to them.
+ * AnalyticsManagerImpl is the implementation of AnalyticsManager interface.
+ * It is responsible for initializing all the analytics trackers
+ * and delegating the tracking calls to them.
  **/
 
 class AnalyticsManagerImpl constructor(

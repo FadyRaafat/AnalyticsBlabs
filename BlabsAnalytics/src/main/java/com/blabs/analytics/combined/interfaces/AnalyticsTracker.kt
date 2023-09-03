@@ -5,7 +5,8 @@ import android.content.Context
 import com.blabs.analytics.combined.utils.enums.AnalyticsTool
 
 /**
- * AnalyticsTracker is an interface which contains the list of all the functions that an analytics tracker should implement.
+ * AnalyticsTracker is an interface which contains the list of
+ * all the functions that an analytics tracker should implement.
  */
 interface AnalyticsTracker {
 

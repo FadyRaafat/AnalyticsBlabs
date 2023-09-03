@@ -5,7 +5,7 @@ import android.content.Context
 import com.blabs.analytics.combined.interfaces.AnalyticsTracker
 import com.blabs.analytics.combined.utils.enums.AnalyticsTool
 import com.blabs.analytics.combined.utils.enums.ApiKeys
-import com.blabs.analytics.combined.utils.getValuesFromMetaData
+import com.blabs.analytics.combined.utils.getValueFromMetaData
 import com.google.firebase.BuildConfig
 import com.webengage.sdk.android.Analytics
 import com.webengage.sdk.android.LocationTrackingStrategy
@@ -18,11 +18,10 @@ class WebEngageAnalyticsTracker : AnalyticsTracker {
 
     private var webEngageAnalytics: Analytics? = null
     override fun initialize(context: Context) {
-        context.getValuesFromMetaData(ApiKeys.WEB_ENGAGE_KEY)?.let {
-            val webEngage = WebEngageConfig.Builder()
-                .setWebEngageKey(it)
-                .setDebugMode(BuildConfig.DEBUG)
-                .setLocationTrackingStrategy(LocationTrackingStrategy.DISABLED).build()
+        context.getValueFromMetaData(ApiKeys.WEB_ENGAGE_KEY)?.let {
+            val webEngage =
+                WebEngageConfig.Builder().setWebEngageKey(it).setDebugMode(BuildConfig.DEBUG)
+                    .setLocationTrackingStrategy(LocationTrackingStrategy.DISABLED).build()
             (context as Application).registerActivityLifecycleCallbacks(
                 WebEngageActivityLifeCycleCallbacks(context, webEngage)
             )
@@ -48,7 +47,6 @@ class WebEngageAnalyticsTracker : AnalyticsTracker {
         webEngageAnalytics?.screenNavigated(eventName, map)
     }
 
-    override fun getAnalyticsTool(): AnalyticsTool {
-        return AnalyticsTool.WEB_ENGAGE
-    }
+    override fun getAnalyticsTool() = AnalyticsTool.WEB_ENGAGE
+
 }

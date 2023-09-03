@@ -3,7 +3,8 @@ package com.blabs.analytics.combined.interfaces
 import com.blabs.analytics.combined.utils.enums.AnalyticsTool
 
 /**
- * AnalyticsManager is an interface which contains the list of all the functions that an analytics manager should implement.
+ * AnalyticsManager is an interface which contains the list of
+ * all the functions that an analytics manager should implement.
  */
 interface AnalyticsManager {
 

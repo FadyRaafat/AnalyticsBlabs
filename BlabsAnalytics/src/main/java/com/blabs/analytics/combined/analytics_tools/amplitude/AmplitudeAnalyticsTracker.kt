@@ -7,7 +7,7 @@ import com.amplitude.api.AmplitudeClient
 import com.blabs.analytics.combined.interfaces.AnalyticsTracker
 import com.blabs.analytics.combined.utils.enums.AnalyticsTool
 import com.blabs.analytics.combined.utils.enums.ApiKeys
-import com.blabs.analytics.combined.utils.getValuesFromMetaData
+import com.blabs.analytics.combined.utils.getValueFromMetaData
 import org.json.JSONObject
 
 
@@ -15,9 +15,8 @@ class AmplitudeAnalyticsTracker : AnalyticsTracker {
 
     private var amplitudeClient: AmplitudeClient? = null
     override fun initialize(context: Context) {
-        context.getValuesFromMetaData(ApiKeys.AMPLITUDE_API_KEY)?.let {
-            amplitudeClient = Amplitude.getInstance()
-                .initialize(context, it)
+        context.getValueFromMetaData(ApiKeys.AMPLITUDE_API_KEY)?.let {
+            amplitudeClient = Amplitude.getInstance().initialize(context, it)
                 .enableForegroundTracking(context as Application)
         } ?: run {
             throw Exception("Amplitude API key not found in manifest file")
@@ -41,7 +40,6 @@ class AmplitudeAnalyticsTracker : AnalyticsTracker {
         amplitudeClient?.logEvent(eventName, eventProperties)
     }
 
-    override fun getAnalyticsTool(): AnalyticsTool {
-        return AnalyticsTool.AMPLITUDE
-    }
+    override fun getAnalyticsTool() = AnalyticsTool.AMPLITUDE
+
 }
